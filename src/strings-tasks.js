@@ -20,7 +20,7 @@
  *   getStringLength(undefined) => 0
  */
 function getStringLength(value) {
-  if (value === '' || value === null || value === undefined) {
+  if (!value) {
     return 0;
   }
   return value.length;
@@ -57,7 +57,7 @@ function isString(value) {
  *   concatenateStrings('', 'bb') => 'bb'
  */
 function concatenateStrings(value1, value2) {
-  return `${value1}${value2}`;
+  return value1 + value2;
 }
 
 /**
@@ -187,8 +187,15 @@ function removeLastOccurrences(str, value) {
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes(/* str */) {
-  throw new Error('Not implemented');
+function sumOfCodes(str) {
+  let result = 0;
+  if (!str) {
+    return 0;
+  }
+  for (let i = 0; i < str.length; i += 1) {
+    result += str.charCodeAt(i);
+  }
+  return result;
 }
 
 /**
@@ -299,8 +306,13 @@ function containsSubstring(str, substring) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  const vowels = 'aeuioyAEIOUY';
+  const disemvowel2 = str
+    .split('')
+    .filter((char) => vowels.includes(char.toLowerCase()))
+    .join('').length;
+  return disemvowel2;
 }
 
 /**
@@ -317,7 +329,10 @@ function countVowels(/* str */) {
  *   isPalindrome('No lemon, no melon') => true
  */
 function isPalindrome(str) {
-  return str.toLowerCase() === str.split('').reverse().join('').toLowerCase();
+  return (
+    str.split('').join('').toUpperCase().replace(/\s/g, '') ===
+    str.split('').reverse().join('').toUpperCase().replace(/\s/g, '')
+  );
 }
 
 /**
