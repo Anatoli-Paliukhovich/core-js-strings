@@ -57,7 +57,7 @@ function isString(value) {
  *   concatenateStrings('', 'bb') => 'bb'
  */
 function concatenateStrings(value1, value2) {
-  return value1 + value2;
+  return value1.concat('', value2);
 }
 
 /**
@@ -75,7 +75,7 @@ function getFirstChar(value) {
   if (value === '') {
     return '';
   }
-  return value[0];
+  return value.charAt(0);
 }
 
 /**
@@ -156,7 +156,11 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  return str.replace(value, '');
+  const firstOccur = str.indexOf(value);
+  if (str.includes(value)) {
+    return str.slice(0, firstOccur) + str.slice(firstOccur + value.length);
+  }
+  return str;
 }
 
 /**
@@ -172,7 +176,11 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeLastOccurrences(str, value) {
-  return str.slice(value);
+  const lastOccur = str.lastIndexOf(value);
+  if (str.includes(value)) {
+    return str.slice(0, lastOccur) + str.slice(lastOccur + value.length);
+  }
+  return str;
 }
 
 /**
